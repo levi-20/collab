@@ -1,0 +1,12 @@
+package com.cs.collabcall;
+
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+
+@SpringBootApplication
+public class CollabCallApplication {
+
+    public static void main(String[] args) {
+        SpringApplication.run(CollabCallApplication.class, args);
+    }
+}
