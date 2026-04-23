@@ -2,9 +2,12 @@ package com.cs.collabcall.entity;
 
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Pattern;
+import jakarta.validation.constraints.Size;
 import lombok.Data;
 
 import java.time.LocalDateTime;
+import java.util.UUID;
 
 @Data
 @Entity
@@ -15,16 +18,17 @@ public class Room {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Size(max = 100, message = "Name too long")
+    @Pattern(regexp = "^[a-zA-Z0-9 _,.-]*$", message = "Invalid characters")
     private String name;
 
+    @Size(max = 500, message = "Description is too long")
     private String description;
-
 
     @Column(name = "created_at", updatable = false)
     private LocalDateTime createdAt;
 
-    @PrePersist
-    private void onCreate() {
-        this.createdAt = LocalDateTime.now();
-    }
+    @Column(name = "created_by", updatable = false)
+    private UUID createdBy;
+
 }
