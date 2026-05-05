@@ -47,7 +47,8 @@ public class RoomController {
         @Pattern(regexp = "^[a-zA-Z0-9 _-]*$")
         String searchTerm) {
 
-        return ResponseEntity.ok(roomService.searchRooms(searchTerm));
+        return ResponseEntity.ok()
+            .body(roomService.searchRooms(searchTerm));
     }
 
     @GetMapping("/user/{userId}")
@@ -60,7 +61,8 @@ public class RoomController {
     @GetMapping
     public ResponseEntity<List<RoomResponse>> getRooms() {
 
-        return ResponseEntity.status(200).body(roomService.listRooms());
+        return ResponseEntity.status(200)
+            .body(roomService.listRooms());
     }
 
     @PostMapping

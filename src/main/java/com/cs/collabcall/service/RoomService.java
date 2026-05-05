@@ -3,7 +3,6 @@ package com.cs.collabcall.service;
 import com.cs.collabcall.dto.RoomResponse;
 import com.cs.collabcall.entity.Room;
 import com.cs.collabcall.repository.RoomRepository;
-import jakarta.persistence.Id;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
@@ -26,7 +25,7 @@ public class RoomService {
 
         log.info("Search by room name: {}", roomName);
         return repository.findByName(roomName)
-            .map(this::toResponse);
+            .map(this::roomResponse);
     }
 
     public List<RoomResponse> listRooms() {
@@ -34,14 +33,14 @@ public class RoomService {
         log.info("Querying all rooms");
         return repository.findAll()
             .stream()
-            .map(this::toResponse)
+            .map(this::roomResponse)
             .toList();
     }
 
     public RoomResponse createRoom(Room room) {
 
         log.info("Creating room with name: {}", room.getName());
-        return toResponse(repository.save(room));
+        return roomResponse(repository.save(room));
     }
 
     public void deleteRoomById(Long id) {
@@ -53,18 +52,18 @@ public class RoomService {
     public Optional<RoomResponse> roomById(Long id) {
 
         return repository.findById(id)
-            .map(this::toResponse);
+            .map(this::roomResponse);
     }
 
     public List<RoomResponse> searchRooms(String searchTerm) {
 
         return repository.findByNameContainingIgnoreCase(searchTerm)
             .stream()
-            .map(this::toResponse)
+            .map(this::roomResponse)
             .toList();
     }
 
-    public RoomResponse toResponse(Room room) {
+    public RoomResponse roomResponse(Room room) {
         return new RoomResponse(
             room.getId(),
             room.getName(),
@@ -78,7 +77,7 @@ public class RoomService {
 
         return repository.findRoomsByCreatedBy(userId)
             .stream()
-            .map(this::toResponse)
+            .map(this::roomResponse)
             .toList();
     }
 }
