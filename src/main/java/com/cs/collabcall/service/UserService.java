@@ -5,6 +5,7 @@ import com.cs.collabcall.dto.UserResponse;
 import com.cs.collabcall.entity.User;
 import com.cs.collabcall.exceptions.UserNotFoundException;
 import com.cs.collabcall.repository.UserRepository;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -12,15 +13,10 @@ import java.util.Optional;
 import java.util.UUID;
 
 @Service
+@RequiredArgsConstructor
 public class UserService {
 
     private final UserRepository userRepository;
-
-
-    public UserService(UserRepository userRepository) {
-
-        this.userRepository = userRepository;
-    }
 
     // GET    /api/users/{id} → user by UUID
     public Optional<UserResponse> getUserById(UUID uuid) throws UserNotFoundException {

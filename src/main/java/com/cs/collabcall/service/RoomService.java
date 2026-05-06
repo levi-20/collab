@@ -3,6 +3,7 @@ package com.cs.collabcall.service;
 import com.cs.collabcall.dto.RoomResponse;
 import com.cs.collabcall.entity.Room;
 import com.cs.collabcall.repository.RoomRepository;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
@@ -12,14 +13,10 @@ import java.util.UUID;
 
 @Slf4j
 @Service
+@RequiredArgsConstructor
 public class RoomService {
 
     private final RoomRepository repository;
-
-    public RoomService(RoomRepository repository) {
-
-        this.repository = repository;
-    }
 
     public Optional<RoomResponse> searchRoomByName(String roomName) {
 
@@ -73,7 +70,7 @@ public class RoomService {
         );
     }
 
-    public List <RoomResponse> searchRoomsByUser(UUID userId) {
+    public List<RoomResponse> searchRoomsByUser(UUID userId) {
 
         return repository.findRoomsByCreatedBy(userId)
             .stream()
