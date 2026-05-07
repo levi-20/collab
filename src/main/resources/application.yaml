@@ -28,4 +28,4 @@ logging:
 
 jwt:
   secret: Ad7xJb49yBZd14ahYm8okUIUJ1FBSOLpMwXiXZ5DcBg=
-  expiry: 300
+  expiry: 3600000

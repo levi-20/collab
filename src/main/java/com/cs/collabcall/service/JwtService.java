@@ -12,7 +12,6 @@ import java.util.Date;
 
 @Slf4j
 @Service
-
 public class JwtService {
 
     @Value("${jwt.secret}")
@@ -29,7 +28,6 @@ public class JwtService {
             .expiration(new Date(System.currentTimeMillis() + expiry))
             .signWith(getSigningKey())
             .compact();
-
     }
 
     public boolean validateToken(String token) {
@@ -52,7 +50,7 @@ public class JwtService {
 
     private SecretKey getSigningKey() {
 
-        return (SecretKey) Keys.hmacShaKeyFor(Base64.getDecoder().decode(secret));
+        return Keys.hmacShaKeyFor(Base64.getDecoder().decode(secret));
     }
 
     private Claims extractClaims(String token) {
